@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My incomes</title>
+</head>
+<body>
+    <h1>My incomes</h1>
+
+    {% for income in incomes %}
+        <h3>Amount: {{ income.amount }}</h3>
+        <p>Category: {{ income.category }}</p>
+        <p>Description: {{ income.description }}</p>
+        <p>Date: {{ income.created_at }}</p>
+        <br>
+    {% empty %}
+        <h3>You dont't have any income!</h3>
+    {% endfor %}
+
+    <a href="{% url 'home' %}">Home page</a>
+
+
+</body>
+</html>

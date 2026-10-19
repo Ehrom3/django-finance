@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>We glad to see you, {{ request.user.username }}!</h1>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+
+        <button type="submit">Logout</button>
+    </form> 
+    <a href="{% url 'income_list' %}">My incomes</a>
+
+</body>
+</html>
