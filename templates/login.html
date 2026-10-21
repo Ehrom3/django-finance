@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-
-    {% if error %}
-        <h3 style="color: red;">{{ error }}</h3>
-    {% endif %}
-
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="Login" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-
-        <button type="submit">Login</button>
-    </form>
-
-    <p>No account? <a href="{% url 'register' %}">Registration</a></p>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+    <div class="auth-header">
+        <div class="eyebrow">С ВОЗВРАЩЕНИЕМ</div>
+        <h1>Вход в аккаунт</h1>
+        <p>Войдите, чтобы управлять своими финансами</p>
+    </div>
+    <div class="form-card">
+        <form method="post">{% csrf_token %}{% if error %}<div class="alert">{{ error }}</div>{% endif %}<div
+                class="form-field"><label for="username">Имя пользователя</label><input id="username" type="text"
+                    name="username" autocomplete="username" required></div>
+            <div class="form-field"><label for="password">Пароль</label><input id="password" type="password"
+                    name="password" autocomplete="current-password" required></div><button
+                class="btn btn-primary btn-full" type="submit">Войти →</button>
+        </form>
+        <p class="auth-bottom">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+    </div>
+</div>
+{% endblock %}

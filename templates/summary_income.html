@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Итог доходов{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">АНАЛИТИКА</div>
+        <h1>Общая сумма доходов</h1>
+        <p>Все ваши поступления за всё время</p>
+    </div>
+</div>
+<div class="total-card total-income">
+    <div class="total-label">СУММА ДОХОДОВ</div>
+    <div class="total-number">+{{ total_income|floatformat:2 }} <small>сомони</small></div>
+    <div class="total-note">Все доходы вашего аккаунта</div>
+</div>
+<div class="toolbar"><a class="btn btn-green" href="{% url 'income_list' %}">Посмотреть доходы →</a><a
+        class="btn btn-outline" href="{% url 'summary' %}">Общий баланс</a></div>
+{% endblock %}

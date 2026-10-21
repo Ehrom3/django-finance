@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>We glad to see you, {{ request.user.username }}!</h1>
-
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-
-        <button type="submit">Logout</button>
-    </form> 
-    <a href="{% url 'income_list' %}">My incomes</a>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="eyebrow">ВАШИ ФИНАНСЫ ПОД КОНТРОЛЕМ</div>
+    <h1>Привет, {{ request.user.username }}! 👋</h1>
+    <p>Управляйте доходами и расходами в одном удобном месте.</p>
+  </div>
+  <div class="hero-symbol">◈</div>
+</section>
+<div class="section-heading">
+  <h2>Быстрые действия</h2>
+  <p>Выберите, что хотите сделать</p>
+</div>
+<div class="grid grid-2">
+  <article class="feature-card income-card">
+    <div class="feature-icon green">↗</div>
+    <div class="card-overline">ПОСТУПЛЕНИЯ</div>
+    <h3>Мои доходы</h3>
+    <p>Добавляйте и отслеживайте все источники дохода.</p>
+    <div class="card-actions"><a class="btn btn-green" href="{% url 'income_create' %}">＋ Добавить доход</a><a
+        class="btn btn-outline" href="{% url 'income_list' %}">Все доходы →</a></div>
+  </article>
+  <article class="feature-card expense-card">
+    <div class="feature-icon red">↘</div>
+    <div class="card-overline">ТРАТЫ</div>
+    <h3>Мои расходы</h3>
+    <p>Записывайте покупки и контролируйте траты.</p>
+    <div class="card-actions"><a class="btn btn-red" href="{% url 'expense_create' %}">＋ Добавить расход</a><a
+        class="btn btn-outline" href="{% url 'expense_list' %}">Все расходы →</a></div>
+  </article>
+</div>
+<div class="section-heading">
+  <h2>Финансовая аналитика</h2>
+  <p>Ваши итоги — в один клик</p>
+</div>
+<div class="grid grid-3"><a class="stat-link" href="{% url 'summary_income' %}"><span
+      class="stat-icon green">↗</span><strong>Доходы</strong><small>Общая сумма →</small></a><a class="stat-link"
+    href="{% url 'summary_expense' %}"><span class="stat-icon red">↘</span><strong>Расходы</strong><small>Общая сумма
+      →</small></a><a class="stat-link" href="{% url 'summary' %}"><span
+      class="stat-icon blue">◉</span><strong>Баланс</strong><small>Полный обзор →</small></a></div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Удалить доход{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">ДОХОДЫ</div>
+        <h1>Удалить доход</h1>
+        <p>Подтвердите действие перед удалением</p>
+    </div>
+</div>
+<div class="form-card delete-card">
+    <div class="delete-icon">!</div>
+    <h2>Вы уверены?</h2>
+    <p>Эта запись будет удалена без возможности восстановления.</p>
+    <div class="delete-details">
+        <div><span>Сумма</span><strong>{{ income.amount }} сомони</strong></div>
+        <div><span>Категория</span><strong>{{ income.category }}</strong></div>
+        <div><span>Описание</span><strong>{{ income.description|default:'Без описания' }}</strong></div>
+    </div>
+    <form method="post" class="form-actions">{% csrf_token %}<button class="btn btn-red" type="submit">Удалить
+            навсегда</button><a class="btn btn-outline" href="{% url 'income_list' %}">Отмена</a></form>
+</div>
+{% endblock %}

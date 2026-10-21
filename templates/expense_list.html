@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Мои расходы{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">РАСХОДЫ</div>
+        <h1>Мои расходы</h1>
+        <p>Все записи вашего личного кабинета</p>
+    </div>
+</div>
+<div class="toolbar"><a class="btn btn-red" href="{% url 'expense_create' %}">＋ Добавить расход</a><a
+        class="btn btn-outline" href="{% url 'home' %}">← На главную</a></div>
+<div class="records">{% for item in expenses %}<article class="record">
+        <div class="record-main">
+            <div class="record-icon red">↘</div>
+            <div>
+                <div class="record-category">{{ item.category }}</div>
+                <div class="record-desc">{{ item.description|default:'Без описания' }}</div>
+                <div class="record-date">{{ item.created_at|date:'d.m.Y, H:i' }}</div>
+            </div>
+        </div>
+        <div class="record-side"><strong class="record-amount text-red">−{{ item.amount }} сомони</strong>
+            <div class="record-actions"><a class="btn btn-small btn-outline" href="{% url 'expense_update' item.id %}">✎
+                    Изменить</a><a class="btn btn-small btn-danger-outline"
+                    href="{% url 'expense_delete' item.id %}">Удалить</a></div>
+        </div>
+    </article>{% empty %}<div class="empty-state">
+        <div class="empty-icon">◇</div>
+        <h3>Пока нет записей</h3>
+        <p>Добавьте первый расход, чтобы увидеть его здесь.</p><a class="btn btn-primary"
+            href="{% url 'expense_create' %}">＋ Добавить расход</a>
+    </div>{% endfor %}</div>
+{% endblock %}

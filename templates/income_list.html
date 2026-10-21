@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My incomes</title>
-</head>
-<body>
-    <h1>My incomes</h1>
-
-    {% for income in incomes %}
-        <h3>Amount: {{ income.amount }}</h3>
-        <p>Category: {{ income.category }}</p>
-        <p>Description: {{ income.description }}</p>
-        <p>Date: {{ income.created_at }}</p>
-        <br>
-    {% empty %}
-        <h3>You dont't have any income!</h3>
-    {% endfor %}
-
-    <a href="{% url 'home' %}">Home page</a>
-
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Мои доходы{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">ДОХОДЫ</div>
+        <h1>Мои доходы</h1>
+        <p>Все записи вашего личного кабинета</p>
+    </div>
+</div>
+<div class="toolbar"><a class="btn btn-green" href="{% url 'income_create' %}">＋ Добавить доход</a><a
+        class="btn btn-outline" href="{% url 'home' %}">← На главную</a></div>
+<div class="records">{% for item in incomes %}<article class="record">
+        <div class="record-main">
+            <div class="record-icon green">↗</div>
+            <div>
+                <div class="record-category">{{ item.category }}</div>
+                <div class="record-desc">{{ item.description|default:'Без описания' }}</div>
+                <div class="record-date">{{ item.created_at|date:'d.m.Y, H:i' }}</div>
+            </div>
+        </div>
+        <div class="record-side"><strong class="record-amount text-green">+{{ item.amount }} сомони</strong>
+            <div class="record-actions"><a class="btn btn-small btn-outline" href="{% url 'income_update' item.id %}">✎
+                    Изменить</a><a class="btn btn-small btn-danger-outline"
+                    href="{% url 'income_delete' item.id %}">Удалить</a></div>
+        </div>
+    </article>{% empty %}<div class="empty-state">
+        <div class="empty-icon">◇</div>
+        <h3>Пока нет записей</h3>
+        <p>Добавьте первый доход, чтобы увидеть его здесь.</p><a class="btn btn-primary"
+            href="{% url 'income_create' %}">＋ Добавить доход</a>
+    </div>{% endfor %}</div>
+{% endblock %}

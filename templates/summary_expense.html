@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Итог расходов{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">АНАЛИТИКА</div>
+        <h1>Общая сумма расходов</h1>
+        <p>Все ваши траты за всё время</p>
+    </div>
+</div>
+<div class="total-card total-expense">
+    <div class="total-label">СУММА РАСХОДОВ</div>
+    <div class="total-number">−{{ total_expense|floatformat:2 }} <small>сомони</small></div>
+    <div class="total-note">Все расходы вашего аккаунта</div>
+</div>
+<div class="toolbar"><a class="btn btn-red" href="{% url 'expense_list' %}">Посмотреть расходы →</a><a
+        class="btn btn-outline" href="{% url 'summary' %}">Общий баланс</a></div>
+{% endblock %}

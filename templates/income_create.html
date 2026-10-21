@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create income</title>
-</head>
-<body>
-    <h1>Create income</h1>
-
-    <form method="POST">
-        {% csrf_token %}
-
-        <label>Amount</label>
-        <input type="number" name="amount" >
-
+{% extends 'base.html' %}
+{% block title %}Добавить доход{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">ДОХОДЫ</div>
+        <h1>Добавить доход</h1>
+        <p>Заполните поля ниже и сохраните запись</p>
+    </div>
+</div>
+<div class="form-card">
+    <form method="post">{% csrf_token %}<div class="form-field"><label for="amount">Сумма, сомони <span
+                    class="required">*</span></label><input id="amount" type="number" name="amount" step="0.01"
+                min="0.01" placeholder="Например, 1500.00" required></div>
+        <div class="form-field"><label for="category">Категория <span class="required">*</span></label><input
+                id="category" type="text" name="category" placeholder="Например, Зарплата" required></div>
+        <div class="form-field"><label for="description">Описание <span
+                    class="optional">(необязательно)</span></label><textarea id="description" name="description"
+                rows="4" placeholder="Добавьте комментарий к записи"></textarea></div>
+        <div class="form-actions"><button class="btn btn-green" type="submit">＋ Добавить доход</button><a
+                class="btn btn-outline" href="{% url 'income_list' %}">Отмена</a></div>
     </form>
-
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Удалить расход{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">РАСХОДЫ</div>
+        <h1>Удалить расход</h1>
+        <p>Подтвердите действие перед удалением</p>
+    </div>
+</div>
+<div class="form-card delete-card">
+    <div class="delete-icon">!</div>
+    <h2>Вы уверены?</h2>
+    <p>Эта запись будет удалена без возможности восстановления.</p>
+    <div class="delete-details">
+        <div><span>Сумма</span><strong>{{ expense.amount }} сомони</strong></div>
+        <div><span>Категория</span><strong>{{ expense.category }}</strong></div>
+        <div><span>Описание</span><strong>{{ expense.description|default:'Без описания' }}</strong></div>
+    </div>
+    <form method="post" class="form-actions">{% csrf_token %}<button class="btn btn-red" type="submit">Удалить
+            навсегда</button><a class="btn btn-outline" href="{% url 'expense_list' %}">Отмена</a></form>
+</div>
+{% endblock %}

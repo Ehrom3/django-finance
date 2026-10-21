@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Баланс{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">ФИНАНСОВЫЙ ОБЗОР</div>
+        <h1>Мой баланс</h1>
+        <p>Общая картина ваших финансов</p>
+    </div>
+</div>
+<div class="balance-hero">
+    <div class="eyebrow">ТЕКУЩИЙ БАЛАНС</div>
+    <div class="balance-value">{{ balance|floatformat:2 }} <small>сомони</small></div>
+    <p>Разница между всеми доходами и расходами</p>
+</div>
+<div class="grid grid-2">
+    <div class="mini-total"><span class="stat-icon green">↗</span><span>Всего доходов</span><strong
+            class="text-green">+{{ total_income|floatformat:2 }} сомони</strong><a
+            href="{% url 'summary_income' %}">Подробнее →</a></div>
+    <div class="mini-total"><span class="stat-icon red">↘</span><span>Всего расходов</span><strong class="text-red">−
+        {{ total_expense|floatformat:2 }} сомони</strong><a href="{% url 'summary_expense' %}">Подробнее →</a></div>
+</div>
+<div class="toolbar"><a class="btn btn-primary" href="{% url 'home' %}">← На главную</a></div>
+{% endblock %}
